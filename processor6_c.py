@@ -17,7 +17,23 @@ class Registers:
 	def readReg(self, rReg): # Read from single register
 		self.readData1=self.X[rReg]
 
-
+class pipeReg:
+        def __init__(self):
+                self.NPC = 0
+                self.Rd = 0
+                self.Rn = 0
+                self.Rm = 0
+                self.ALUresult = 0
+                self.Immediate = 0
+                self.ALUSrc = 0
+                self.ALUOp = 0
+                self.MemRead = 0
+                self.MemWrite = 0
+                self.PCSrc = 0
+                self.RegWrite = 0
+                self.MemtoReg = 0
+                
+                
 class Control:
 
 	def __init__(self):
