@@ -26,6 +26,8 @@ class pipeReg:
 		self.inReg = 0
 		self.controlU = Control()
 		self.ALU = 0
+		self.readData1 = 0
+		self.readData2 = 0
 
 
 

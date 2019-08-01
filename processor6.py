@@ -32,6 +32,8 @@ def decode(temp):
         temp.controlU.insRead(temp.inReg.opcode)  # Set control bit values
 
         reg.readRegs(temp.inReg.Rn, temp.inReg.Rm)  # read in values from Rn and Rm registers
+        temp.readData1 = reg.readData1
+        temp.readData2 = reg.readData2
     return temp
 
 
@@ -45,10 +47,10 @@ def execute(temp):
             temp.ALU = arm.ALU(reg.X[temp.inReg.Rd], temp.inReg.Imm, temp.controlU.ALUop1, temp.controlU.ALUop2)
             # creates ALU operation for B type instructions
         elif (temp.controlU.ALUSrc == 1):
-            temp.ALU = arm.ALU(reg.readData1, temp.inReg.Imm, temp.controlU.ALUop1, temp.controlU.ALUop2)
+            temp.ALU = arm.ALU(temp.readData1, temp.inReg.Imm, temp.controlU.ALUop1, temp.controlU.ALUop2)
             # creates ALU operation for I type and D type instructions
         elif (temp.controlU.ALUSrc == 0):
-            temp.ALU = arm.ALU(reg.readData1, reg.readData2, temp.controlU.ALUop1, temp.controlU.ALUop2)
+            temp.ALU = arm.ALU(temp.readData1, temp.readData2, temp.controlU.ALUop1, temp.controlU.ALUop2)
 
             # creates ALU operation for R type instructions
         temp.ALU.ALUcontrol(temp.ALU.ALU_op, temp.inReg.opcode)
