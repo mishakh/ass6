@@ -23,9 +23,9 @@ class pipeReg:
 	def __init__(self):
 		self.PC = 0
 		self.NPC = 0
-		self.inReg = InstructionReg()
+		self.inReg = 0
 		self.controlU = Control()
-		self.ALU = ALU()
+		self.ALU = 0
 
 
 
