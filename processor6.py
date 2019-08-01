@@ -99,38 +99,48 @@ def memory(temp):
                 temp.PC = temp.NPC
     return temp
 
-
+cycle_count = 0
+instruction_count = 0
 
 # ###RUN TIME
-while PC<len(instrucMem):
+while PC<len(instrucMem)+5:
 
-
-
+    cycle_count += 1
+    # STOP READING FOR INSTRUCTIONS IF THERE AREN'T ANY LEFT
+    if PC < len(instrucMem):
         fetch_out = fetch(PC)
-        decode_out = decode(decode_in)
-        execute_out = execute(execute_in)
-        memory_out = memory(memory_in)
-        writeback_out = writeback(writeback_in)
+        instruction_count += 1
 
-        # this block of code ensures that the processor doesn't repeat the same instruction
-        if writeback_out.__class__()== arm.pipeReg:
-                if writeback_out.PC > PC:
-                        PC = writeback_out.PC
-                else:   #
-                        PC += 1
-        else:
-                PC += 1
+    decode_out = decode(decode_in)
+    execute_out = execute(execute_in)
+    memory_out = memory(memory_in)
+    writeback_out = writeback(writeback_in)
 
-        decode_in = fetch_out
-        execute_in = decode_out
-        memory_in = execute_out
-        writeback_in = memory_out
+    # this block of code ensures that the processor doesn't repeat the same instruction
+    if writeback_out.__class__()== arm.pipeReg:
+            if writeback_out.PC > PC:
+                    PC = writeback_out.PC
+            else:   #
+                    PC += 1
+    else:
+            PC += 1
 
 
+    decode_in = fetch_out
+    execute_in = decode_out
+    memory_in = execute_out
+    writeback_in = memory_out
 
 
-        print('Registers:\n',(reg.X))
-        print("PC: "+str(PC))
-        print('-----------------------\n')
+
+
+    print('Registers:\n',(reg.X))
+    print("PC: "+str(PC))
+    print('-----------------------\n')
 print('END OF FILE')
+
+print("CPI = CYCLES / INSTRUCTIONS:")
+print(cycle_count)
+print(instruction_count)
+print(cycle_count/instruction_count)
 
