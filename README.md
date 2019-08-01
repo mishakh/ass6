@@ -1,7 +1,10 @@
-## ass6
+### ass6
 comp architecture assignment 6
 
-# To Do
-- [ ] CYCLE STRUCTURE
-- [ ] INSTRUCTION REGISTERS
-- [ ] HAZARD DETECTION UNIT
+## To Do
+- [x] CYCLE STRUCTURE
+- [x] PIPELINE REGISTERS
+- [?] HAZARD DETECTION UNIT
+- [ ] FIX HAZARDS
+- [ ] STALLING?
+# Ideas
