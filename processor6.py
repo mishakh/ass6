@@ -103,7 +103,7 @@ cycle_count = 0
 instruction_count = 0
 
 # ###RUN TIME
-while PC<len(instrucMem)+5:
+while PC<len(instrucMem)+4:
 
     cycle_count += 1
     # STOP READING FOR INSTRUCTIONS IF THERE AREN'T ANY LEFT
