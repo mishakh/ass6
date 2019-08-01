@@ -18,22 +18,22 @@ class Registers:
 		self.readData1=self.X[rReg]
 
 class pipeReg:
-        def __init__(self):
-                self.NPC = 0
-                self.Rd = 0
-                self.Rn = 0
-                self.Rm = 0
-                self.ALUresult = 0
-                self.Immediate = 0
-                self.ALUSrc = 0
-                self.ALUOp = 0
-                self.MemRead = 0
-                self.MemWrite = 0
-                self.PCSrc = 0
-                self.RegWrite = 0
-                self.MemtoReg = 0
-                
-                
+    def __init__(self):
+            self.NPC = 0
+            self.Rd = 0
+            self.Rn = 0
+            self.Rm = 0
+            self.ALUresult = 0
+            self.Immediate = 0
+            self.ALUSrc = 0
+            self.ALUOp = 0
+            self.MemRead = 0
+            self.MemWrite = 0
+            self.PCSrc = 0
+            self.RegWrite = 0
+            self.MemtoReg = 0
+
+
 class Control:
 
 	def __init__(self):
@@ -121,7 +121,7 @@ class ALU:
 	def __init__(self,in1,in2,ALU_op1,ALU_op2):
 		self.in1 = in1
 		self.in2 = in2
-		self.ALU_op=str(ALU_op1)+str(ALU_op2) 	#ALU opcode to be used by ALU control 
+		self.ALU_op=str(ALU_op1)+str(ALU_op2) 	#ALU opcode to be used by ALU control
 		self.ALU_c = 0
 		self.output = 0
 		self.zero = 0
