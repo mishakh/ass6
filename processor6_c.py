@@ -164,4 +164,3 @@ class ALU:
 				self.zero=1
 		if(control==5):
 			self.output = self.in1|self.in2
-

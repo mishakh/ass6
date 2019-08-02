@@ -68,13 +68,13 @@ def memory(temp):
             if (temp.controlU.uncond == 1):  # B instruction
                 temp.PC = temp.PC + temp.inReg.Imm  # PC <- PC+addr
                 print("PC: " + str(temp.PC))
-                print('-----------------------\n')
+                print('-------------------------------------------------------------------------------\n')
 
             elif (temp.ALU.zero == 1):  # if R[Rd]==0
                 temp.PC = temp.PC + temp.inReg.Imm  # PC <- PC+addr
                 print('Registers:\n', (reg.X))
                 print("PC: " + str(temp.PC))
-                print('-----------------------\n')
+                print('-------------------------------------------------------------------------------\n')
 
             else:
                 print('Registers:\n', (reg.X))
@@ -93,7 +93,7 @@ def runtime(instrucMem):
     cycle_count = 0
     instruction_count = 0
 
-    while PC<len(instrucMem)+5:
+    while PC<len(instrucMem)+4:
         print('cycle: '+str(cycle_count))
         
         writeback_out = writeback(writeback_in)
@@ -128,11 +128,12 @@ def runtime(instrucMem):
         cycle_count += 1
         print('Registers:\n',(reg.X))
         print("PC: "+str(PC))
-        print('-----------------------\n')
+        print('-------------------------------------------------------------------------------\n')
     print('END OF FILE')
 
     print("CPI = CYCLES / INSTRUCTIONS:")
     print(cycle_count)
+    instruction_count-=2
     print(instruction_count)
     print(cycle_count/instruction_count)
 #############################
@@ -141,33 +142,38 @@ def runtime(instrucMem):
 reg = arm.Registers()     #create register object with Registers and Data Memory
 ##
 #Example 5
+print('-----------------------BEGIN EXAMPLE 5--------------------')
 f = open("example5.txt", 'r')
 instrucMem = f.readlines()
 reg.X[1]=3
 reg.X[2]=17
 reg.X[11]=9
-reg.X[19]=42
+reg.X[19]=12
 runtime(instrucMem)
-##print('-----------------------END EXAMPLE 5--------------------')
-###Example 7
-##reg.regClear()
-##f = open("example7.txt", 'r')
-##instrucMem = f.readlines()
-##reg.X[9]=5
-##reg.X[21]=10
-##reg.dataMem[13]=22
-##runtime(instrucMem)
-##
-##print('-----------------------END EXAMPLE 7--------------------')
-###Example 8
-##reg.regClear()
-##f = open("example8.txt", 'r')
-##instrucMem = f.readlines()
-##reg.X[1]=5
-##reg.X[2]=18
-##reg.X[19]=3
-##reg.X[4]=10
-##reg.dataMem[31]=59
-##runtime(instrucMem)
-##
-##print('-----------------------END EXAMPLE 8--------------------')
+print('-----------------------END EXAMPLE 5--------------------')
+print('-----------------------BEGIN EXAMPLE 7--------------------')
+#Example 7
+reg.regClear()
+f = open("example7.txt", 'r')
+instrucMem = f.readlines()
+reg.X[9]=5
+reg.X[21]=10
+reg.dataMem[13]=22
+runtime(instrucMem)
+
+print('-----------------------END EXAMPLE 7--------------------')
+print('-----------------------BEGIN EXAMPLE 8--------------------')
+#Example 8
+reg.regClear()
+f = open("example8.txt", 'r')
+instrucMem = f.readlines()
+reg.X[1]=5
+reg.X[2]=15
+reg.X[4]=1
+reg.X[5]=69
+reg.X[11]=13
+reg.X[19]=2
+
+runtime(instrucMem)
+
+print('-----------------------END EXAMPLE 8--------------------')
