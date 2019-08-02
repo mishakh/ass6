@@ -11,12 +11,12 @@ class Registers:
         def clearReg(self):
                 for i in range(0,31):
                     self.X[i]=0
-        
+
 	def readRegs(self, rReg1, rReg2): # Read from 2 registers
 		self.readData1=self.X[rReg1]
 		self.readData2=self.X[rReg2]
 		#print(self.readData1, self.readData2)
-		
+
 	def readReg(self, rReg): # Read from single register
 		self.readData1=self.X[rReg]
 
@@ -161,3 +161,5 @@ class ALU:
 		if(control==3):
 			if(self.in1==0): #check for zero, set ALU.zero to 1 if true
 				self.zero=1
+		if(control==5):
+			self.output=self.in1|self.in2
