@@ -151,23 +151,26 @@ reg.X[2]=17
 reg.X[11]=9
 reg.X[19]=42
 runtime(instrucMem)
-
+print('-----------------------END EXAMPLE 5--------------------')
 #Example 7
-reg.clearReg()
+reg.regClear()
 f = open("example7.txt", 'r')
 instrucMem = f.readlines()
-reg.X[1]=3
-reg.X[2]=17
-reg.X[11]=9
-reg.X[19]=42
+reg.X[9]=69
+reg.X[21]=10
+reg.dataMem[77]=13
 runtime(instrucMem)
 
-#Example 8
-reg.clearReg()
-f = open("example8.txt", 'r')
-instrucMem = f.readlines()
-reg.X[1]=3
-reg.X[2]=17
-reg.X[11]=9
-reg.X[19]=42
-runtime(instrucMem)
+print('-----------------------END EXAMPLE 7--------------------')
+###Example 8
+##reg.regClear()
+##f = open("example8.txt", 'r')
+##instrucMem = f.readlines()
+##reg.X[1]=5
+##reg.X[2]=18
+##reg.X[19]=3
+##reg.X[4]=10
+##reg.dataMem[31]=59
+##runtime(instrucMem)
+##
+##print('-----------------------END EXAMPLE 8--------------------')
