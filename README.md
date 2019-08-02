@@ -4,7 +4,7 @@ comp architecture assignment 6
 ## To Do
 - [x] CYCLE STRUCTURE
 - [x] PIPELINE REGISTERS
-- [?] HAZARD DETECTION UNIT
-- [ ] FIX HAZARDS
-- [ ] STALLING?
+- [x] ---HAZARD DETECTION UNIT---
+- [x] FIX HAZARDS
+- [x] STALLING?
 # Ideas
