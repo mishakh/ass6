@@ -15,7 +15,7 @@ class Registers:
 	def readRegs(self, rReg1, rReg2): # Read from 2 registers
 		self.readData1=self.X[rReg1]
 		self.readData2=self.X[rReg2]
-		#print(self.readData1, self.readData2)
+		print('X'+str(rReg1)+'='+str(self.readData1)+'  X'+str(rReg2)+'='+str(self.readData2))
 
 	def readReg(self, rReg): # Read from single register
 		self.readData1=self.X[rReg]
@@ -25,7 +25,8 @@ class pipeReg:
 	def __init__(self):
 		self.PC = 0
 		self.NPC = 0
-		self.inReg = 0
+		self.instrucReg = 0
+		self.inReg = ''
 		self.controlU = Control()
 		self.ALU = 0
 		self.readData1 = 0
@@ -96,26 +97,26 @@ class InstructionReg:
 			self.Rd=int(instruc[1])
 			self.Rn=int(instruc[2])     # R-Format
 			self.Rm=int(instruc[3])
-			print(self.opcode,self.Rd,self.Rn,self.Rm,'\t--Instruction Register Read')
+			print('-OP:',self.opcode,' -Rd:',self.Rd,' -Rn:',self.Rn,' -Rm:',self.Rm,'\t--Instruction Decode')
 		elif (self.opcode=='LDUR' or self.opcode=='STUR'):
 			self.Rd=int(instruc[1])
 			self.Rn=int(instruc[2])     # D-Format
 			self.Imm= int(instruc[3])
-			print(self.opcode,self.Rd,self.Rn,self.Imm,'\t--Instruction Register Read')
+			print('-OP:',self.opcode,' -Rt:',self.Rd,' -Rn:',self.Rn,' -Immediate:',self.Imm,'\t--Instruction Decode')
 		elif(self.opcode=='ADDI' or self.opcode=='SUBI'):
 			self.Rd=int(instruc[1])
 			self.Rn=int(instruc[2])     # I-Format
 			self.Imm=int(instruc[3])
-			print(self.opcode,self.Rd,self.Rn,self.Imm,'\t--Instruction Register Read')
+			print('-OP:',self.opcode,' -Rd:',self.Rd,' -Rn:',self.Rn,' -Immediate:',self.Imm,'\t--Instruction Decode')
 		elif(self.opcode=='B' or self.opcode=='CBZ'):
 			self.Imm=int(instruc[1])
 			if(self.opcode=='CBZ'):     # CBZ-Format
 				self.Rd=int(instruc[1])
 				self.Imm=int(instruc[2])
-				print(self.opcode,self.Rd,self.Imm,'\t--Instruction Register Read')
+				print('-OP:',self.opcode,'-Rt:',self.Rd,'-Immediate:',self.Imm,'\t--Instruction Decode')
 			elif(self.opcode=='B'):
 				self.Imm=int(instruc[1])
-				print(self.opcode,self.Imm,'\t\t--Instruction Register Read')
+				print('-OP:',self.opcode,'-Immediate:',self.Imm,'\t\t--Instruction Decode')
 
 class ALU:
 
@@ -161,3 +162,6 @@ class ALU:
 		if(control==3):
 			if(self.in1==0): #check for zero, set ALU.zero to 1 if true
 				self.zero=1
+		if(control==5):
+			self.output = self.in1|self.in2
+

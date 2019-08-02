@@ -9,11 +9,13 @@ import processor6_c as arm       #import classes/functions
 def fetch(PC):
     temp = arm.pipeReg()
     temp.npc = PC + 1
-    temp.inReg = arm.InstructionReg(instrucMem[PC])
+    temp.instrucReg=instrucMem[PC]
+    print('Instruction Fetch: '+temp.instrucReg)
     return temp
 def decode(temp):
-
+        
     if arm.pipeReg == temp.__class__:
+        temp.inReg=arm.InstructionReg(temp.instrucReg)
         temp.controlU = arm.Control()  # creates control unit for this instruction (with all flags set low)
         temp.controlU.insRead(temp.inReg.opcode)  # Set control bit values
 
@@ -42,6 +44,7 @@ def execute(temp):
         temp.ALU.ALUcontrol(temp.ALU.ALU_op, temp.inReg.opcode)
         # read in ALU op and set the appropriate ALU operation
         temp.ALU.exec(temp.ALU.ALU_c)  # perform ALU operation, place result in ALU.output
+        print('ALU Result: '+str(temp.ALU.output))
     return temp
 
 
@@ -99,15 +102,15 @@ def runtime(instrucMem):
     while PC<len(instrucMem)+5:
         print('cycle: '+str(cycle_count))
         
+        writeback_out = writeback(writeback_in)
+        memory_out = memory(memory_in)
+        execute_out = execute(execute_in)
+        decode_out = decode(decode_in)
         # STOP READING FOR INSTRUCTIONS IF THERE AREN'T ANY LEFT
         if PC < len(instrucMem):
             fetch_out = fetch(PC)
             instruction_count += 1
-        
-        decode_out = decode(decode_in)
-        execute_out = execute(execute_in)
-        memory_out = memory(memory_in)
-        writeback_out = writeback(writeback_in)
+
 
         # this block of code ensures that the processor doesn't repeat the same instruction
         if writeback_out.__class__()== arm.pipeReg:
