@@ -8,15 +8,17 @@ class Registers:
 	def regWrite(self, wReg, wData):
 		self.X[wReg]=wData 	#write data to register
 		print(wData,' in X',wReg,'\t--Register Write')
-
+        def clearReg(self):
+                for i in range(0,31):
+                    self.X[i]=0
+        
 	def readRegs(self, rReg1, rReg2): # Read from 2 registers
 		self.readData1=self.X[rReg1]
 		self.readData2=self.X[rReg2]
 		#print(self.readData1, self.readData2)
-
+		
 	def readReg(self, rReg): # Read from single register
 		self.readData1=self.X[rReg]
-
 
 class pipeReg:
 
