@@ -1,2 +1,5 @@
 # ignore excel table
 fwding.xlsx
+
+# ignore pycache
+/_pycache_/
