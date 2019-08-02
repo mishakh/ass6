@@ -1,24 +1,19 @@
 #Assignment 5 ARM Processor
 import processor6_c as arm       #import classes/functions
 
-
-
-
-
-
 def fetch(PC):
     temp = arm.pipeReg()
     temp.npc = PC + 1
     temp.instrucReg=instrucMem[PC]
     print('Instruction Fetch: '+temp.instrucReg)
     return temp
+
 def decode(temp):
-        
+       
     if arm.pipeReg == temp.__class__:
         temp.inReg=arm.InstructionReg(temp.instrucReg)
         temp.controlU = arm.Control()  # creates control unit for this instruction (with all flags set low)
         temp.controlU.insRead(temp.inReg.opcode)  # Set control bit values
-
         reg.readRegs(temp.inReg.Rn, temp.inReg.Rm)  # read in values from Rn and Rm registers
         temp.readData1 = reg.readData1
         temp.readData2 = reg.readData2
@@ -61,7 +56,6 @@ def memory(temp):
     if temp.__class__ == arm.pipeReg:
         if (temp.controlU.memToReg == 1):
             if (temp.controlU.memRead == 1):  # LOAD
-                print( temp.ALU.output)
                 reg.regWrite(temp.inReg.Rd, reg.dataMem[temp.ALU.output])  # load data memory value to Rd
                 print('Data Memory:\n', reg.dataMem)
             elif (temp.controlU.memWrite == 1):  # STORE
@@ -103,13 +97,15 @@ def runtime(instrucMem):
         print('cycle: '+str(cycle_count))
         
         writeback_out = writeback(writeback_in)
-        memory_out = memory(memory_in)
-        execute_out = execute(execute_in)
         decode_out = decode(decode_in)
+        execute_out = execute(execute_in)
+        memory_out = memory(memory_in)
+        
         # STOP READING FOR INSTRUCTIONS IF THERE AREN'T ANY LEFT
         if PC < len(instrucMem):
             fetch_out = fetch(PC)
-            instruction_count += 1
+            if(fetch_out.instrucReg!='STALL'):
+                instruction_count += 1
 
 
         # this block of code ensures that the processor doesn't repeat the same instruction
@@ -143,9 +139,7 @@ def runtime(instrucMem):
 # ### INITIAL
 # load Instruction Memory
 reg = arm.Registers()     #create register object with Registers and Data Memory
-reg.dataMem[0]=10
-reg.dataMem[1]=13       #load in data memory array values
-
+##
 #Example 5
 f = open("example5.txt", 'r')
 instrucMem = f.readlines()
@@ -154,17 +148,17 @@ reg.X[2]=17
 reg.X[11]=9
 reg.X[19]=42
 runtime(instrucMem)
-print('-----------------------END EXAMPLE 5--------------------')
-#Example 7
-reg.regClear()
-f = open("example7.txt", 'r')
-instrucMem = f.readlines()
-reg.X[9]=69
-reg.X[21]=10
-reg.dataMem[77]=13
-runtime(instrucMem)
-
-print('-----------------------END EXAMPLE 7--------------------')
+##print('-----------------------END EXAMPLE 5--------------------')
+###Example 7
+##reg.regClear()
+##f = open("example7.txt", 'r')
+##instrucMem = f.readlines()
+##reg.X[9]=5
+##reg.X[21]=10
+##reg.dataMem[13]=22
+##runtime(instrucMem)
+##
+##print('-----------------------END EXAMPLE 7--------------------')
 ###Example 8
 ##reg.regClear()
 ##f = open("example8.txt", 'r')

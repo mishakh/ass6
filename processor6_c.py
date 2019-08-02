@@ -2,7 +2,7 @@
 class Registers:
 	def __init__(self):
 		self.X=[0]*32 		#Register Array X0-X31
-		self.dataMem=[0]*128	#Data Memory Array w/ 32 blocks
+		self.dataMem=[0]*32	#Data Memory Array w/ 32 blocks
 		readData1 = 0 		#
 		readData2 = 0 		#loaded register values go here
 	def regWrite(self, wReg, wData):
